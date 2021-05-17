@@ -2,22 +2,31 @@
 
 <div id="app">
   <example :ok="ok"></example>
+  <button @click="ok = !ok"></button>
 </div>
 
 <script>
-const Foo = {
-  // Implement this!
-}
+  const Foo = {
+    // Implement this!
+    // template: '<div>foo</div>'
+    render: h => h('div', null, 'foo'),
+  }
 
-const Bar = {
-  // Implement this!
-}
+  const Bar = {
+    // Implement this!
+    render: h => h('div', null, 'bar'),
+  }
 
-Vue.component('example', {
-  // Implement this!
-})
+  Vue.component('example', {
+    // Implement this!
+    functional: true,
+    render: (h, ctx) => h(ctx.props.ok ? Bar : Foo)
+  })
 
-new Vue({
-  el: '#app'
-})
+  new Vue({
+    el: '#app',
+    data: {
+      ok: false
+    }
+  })
 </script>
