@@ -1,11 +1,24 @@
 <script>
-// a class representing a dependency
-// exposing it on window is necessary for testing
-window.Dep = class Dep {
-  // Implement this!
-}
+  // a class representing a dependency
+  // exposing it on window is necessary for testing
+  window.Dep = class Dep {
+    // Implement this!
+    subscribers = new Set()
+    depend() {
+      tempFunc && this.subscribers.add(tempFunc)
+    }
 
-function autorun (update) {
-  // Implement this!
-}
+    notify() {
+      this.subscribers.forEach(fn => fn())
+    }
+  }
+
+  let tempFunc = null
+  function autorun(update) {
+    // Implement this!
+    tempFunc = update
+    update()
+    // 置空，防止用户在 autorun 之外调用 depend 方法
+    tempFunc = null
+  }
 </script>
