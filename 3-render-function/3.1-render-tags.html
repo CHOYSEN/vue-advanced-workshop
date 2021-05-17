@@ -5,9 +5,15 @@
 </div>
 
 <script>
-Vue.component('example', {
-  // Implement this!
-})
+  Vue.component('example', {
+    // Implement this!
+    props: {
+      tags: Array
+    },
+    render(h) {
+      return h('div', null, this.tags.map(h))
+    }
+  })
 
-new Vue({ el: '#app' })
+  new Vue({ el: '#app' })
 </script>
